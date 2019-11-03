@@ -1,0 +1,35 @@
+---
+
+- name: Install cups and hplip
+  apt:
+    name="{{ pkgs }}"
+    state="present"
+    update_cache=False
+    install_recommends=True
+  vars:
+    pkgs:
+    - task-print-server
+    - system-config-printer
+    - hpijs-ppds
+    - hplip
+    - cups
+    - printer-driver-cups-pdf
+
+- name: Stop Cups
+  service:
+    name: cups
+    state: stopped
+
+- name: overwrite printer files
+  copy:
+    src: printers/
+    dest: /etc/cups
+    owner: root
+    group: lp
+    mode: 0600
+
+- name: Restart Cups
+  service:
+    name: cups
+    state: started
+

@@ -28,6 +28,9 @@
     group: lp
     mode: 0640
 
+- name: Set default PaperSize to A4
+  command: paperconfig -p A4
+
 - name: Restart Cups
   service:
     name: cups

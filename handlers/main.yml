@@ -8,6 +8,6 @@
 - name: Restart Cups
   service:
     name: cups
-    state: reloaded
+    state: restarted
   when: cups_config.changed
   become: yes
